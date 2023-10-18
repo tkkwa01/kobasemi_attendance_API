@@ -1,9 +1,9 @@
 package validation
 
 import (
-	"attendance-management/packages/util"
 	ut "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"
+	"kobasemi_attendance/packages/util"
 	"reflect"
 )
 
