@@ -50,8 +50,7 @@ func main() {
 	}
 
 	r := gin.Default()
-	r.POST("/attendance/register", handler.RegisterAttendance)
+	r.POST("/attendance/register", handler.UpdateAttendance)
 	r.GET("/attendance/watch", handler.GetAllAttendances)
-	r.PATCH("/attendance/:name", handler.UpdateAttendanceStatus)
 	r.Run(":8085")
 }

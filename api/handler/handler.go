@@ -40,17 +40,24 @@ func (h *AttendanceHandler) GetAllAttendances(c *gin.Context) {
 	c.JSON(200, attendances)
 }
 
-// 実質出席メソッド。出席したらtrueになる
-func (h *AttendanceHandler) UpdateAttendanceStatus(c *gin.Context) {
-	name := c.Param("name")
+func (h *AttendanceHandler) UpdateAttendance(c *gin.Context) {
 	var update domain.Attendance
 	if err := c.BindJSON(&update); err != nil {
 		c.JSON(400, gin.H{"error": "Bad request"})
 		return
 	}
-	if err := h.attendanceUsecase.UpdateAttendanceStatus(name, update.Status); err != nil {
+
+	name := update.Name
+	status := update.Status
+
+	// 成功した場合はtrue、該当するnameがない場合falseを返す
+	if success, err := h.attendanceUsecase.UpdateAttendanceStatus(name, status); err != nil {
 		c.JSON(500, gin.H{"error": "Internal Server Error"})
 		return
+	} else if !success {
+		c.JSON(404, gin.H{"error": "Name not found"})
+		return
 	}
+
 	c.JSON(200, gin.H{"message": "Status updated"})
 }
