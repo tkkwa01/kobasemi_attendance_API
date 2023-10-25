@@ -5,6 +5,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"kobasemi_attendance/api/handler"
 	"kobasemi_attendance/database"
@@ -50,6 +51,14 @@ func main() {
 	}
 
 	r := gin.Default()
+
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:3000", "http://192.168.50.88"}
+	config.AllowMethods = []string{"GET", "POST"}
+	config.AllowHeaders = []string{"Origin", "Content-Type", "Authorization", "ngrok-skip-browser-warning"} // この行を追加
+
+	r.Use(cors.New(config))
+
 	r.POST("/attendance/register", handler.UpdateAttendance)
 	r.GET("/attendance/watch", handler.GetAllAttendances)
 	r.Run(":8085")
