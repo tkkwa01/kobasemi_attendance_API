@@ -7,3 +7,5 @@ A simple attendance system API.
 ## Description
 This is a simple attendance system API.
 This API is used by [kobasemi_attendance_front](https://github.com/tkkwa01/kobasemi_attendance_front)．
+
+The contents written in a text file (names.txt) are auto-migrated to the database.
