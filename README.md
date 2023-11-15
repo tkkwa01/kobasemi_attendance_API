@@ -6,4 +6,4 @@ A simple attendance system API.
 
 ## Description
 This is a simple attendance system API.
-This API is used by [kobasemi_attendance_front](https://github.com/tkkwa01/kobasemi_attendance_front)
+This API is used by [kobasemi_attendance_front](https://github.com/tkkwa01/kobasemi_attendance_front)．
