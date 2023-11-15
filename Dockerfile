@@ -1,10 +1,15 @@
-# Dockerfile
-FROM golang:1.20.4
-WORKDIR /app
-COPY go.mod .
-COPY go.sum .
+FROM golang:1.20 as builder
+
+WORKDIR /go/src
+
+RUN go install github.com/cosmtrek/air@latest
+
+ENV GO111MODULE=on
+
+COPY go.mod go.sum ./
+
 RUN go mod download
-COPY . .
-RUN go build -o main .
-EXPOSE 8085
-CMD ["./main"]
+
+ENV DOTENV_PATH=/go/src/.env
+
+CMD ["air"]
